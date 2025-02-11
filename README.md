@@ -11,8 +11,14 @@ This repository is dedicated to experimenting with Node.js and integrating AI mo
 - 🔧 Setup with Express.js for backend development  
 - 🤖 Integration with Google Generative AI (Gemini 1.5)  
 - 📡 API routes to generate AI-based responses  
-- 🧪 Experimentation with various AI models  
+- 🧪 Experimentation with various AI models
 
+  
+## 🔗Important Link
+ - 🪽[source](https://ai.google.dev/gemini-api/docs/text-generation?lang=node)
+ - 🗄️[Get Gemini API Key ](https://aistudio.google.com/welcome)
+ - 🚜[How to Create a Project in Google ](https://console.cloud.google.com )
+   
 ## 🛠️ Installation
 
 To set up this project locally:
