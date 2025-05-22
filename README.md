@@ -25,5 +25,5 @@ To set up this project locally:
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/Saquib-Anjum/AI-WITH-NODEJS.git
+   git clone https://github.com/Saquib-Anjum/AI-with-NodeJS.git
    ```
