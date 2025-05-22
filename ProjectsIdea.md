@@ -107,4 +107,4 @@ Pick any idea ➜ Build it using Gemini/OpenAI ➜ Deploy with Netlify/Vercel �
 
 ---
 
-> Made with 💙 by a developer who loves AI
+> Made with 💙 by a [🪧Saquib-Anjum](https://github.com/Saquib-Anjum) who loves AI 🤖
