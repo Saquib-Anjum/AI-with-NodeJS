@@ -19,7 +19,18 @@ app.post("/generate-readme", async (req, res) => {
         {
           parts: [
             {
-              text: `Generate a professional and well-formatted README.md file for the following project: ${projectInput}`,
+              text: `Generate a clean, professional, and visually appealing README.md file for the following project. Use cool and relevant emojis to enhance readability. Do not include any extra explanation or markdown fences ("\\\`\\\`\\\`"). Include only the final README content. Structure it with the following sections:
+              - Project title with emojis  
+              - Badges (placeholders for License, Maintenance, Contributors)  
+              - Short catchy description  
+              - Demo section with placeholders for result image and live link  
+              - Features list with emojis  
+              - Tech stack (frontend, backend, database, other tools)  
+              - Getting started (clone repo, install deps, .env setup, run app)  
+              - Contributing section  
+              - License, Contact, Acknowledgment
+              Project Details:  
+              ${projectInput}`,
             },
           ],
         },

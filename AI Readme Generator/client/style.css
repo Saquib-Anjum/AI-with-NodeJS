@@ -1,8 +1,18 @@
 body {
   font-family: sans-serif;
-  background: #f0f2f5;
   text-align: center;
   padding: 2rem;
+
+  background: linear-gradient(
+      to bottom right,
+      rgba(29, 26, 26, 0.9),
+      rgba(0, 0, 0, 0.4)
+    ),
+    url("./public/bg.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
 }
 .container {
   max-width: 700px;
@@ -14,10 +24,14 @@ textarea {
   margin: 1rem 0;
   padding: 1rem;
   font-size: 1rem;
+  background-color: transparent;
 }
 button {
   padding: 0.7rem 1.5rem;
   font-size: 1rem;
   margin: 0.5rem;
   cursor: pointer;
+}
+h1 {
+  color: white;
 }
