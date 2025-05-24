@@ -15,7 +15,9 @@ This repository is dedicated to experimenting with Node.js and integrating AI mo
 
 ## 🔗Important Link
 
-- 🪽[source](https://ai.google.dev/gemini-api/docs/text-generation?lang=node)
+- 💡[10+ Project Ideas ](https://github.com/Saquib-Anjum/AI-with-NodeJS/blob/main/ProjectsIdea.md)
+
+- 🪽[source text-generation ](https://ai.google.dev/gemini-api/docs/text-generation?lang=node)
 - 🗄️[Get Gemini API Key ](https://aistudio.google.com/welcome)
 - 🚜[How to Create a Project in Google ](https://console.cloud.google.com)
 
