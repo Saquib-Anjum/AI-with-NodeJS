@@ -35,3 +35,30 @@ button {
 h1 {
   color: white;
 }
+
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: #555;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #121212;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #242424;
+}
+
+.glass {
+  background: rgba(113, 91, 91, 0.08);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(6.6px);
+  -webkit-backdrop-filter: blur(6.6px);
+  border: 1px solid rgba(113, 91, 91, 0.38);
+  color: white;
+}
