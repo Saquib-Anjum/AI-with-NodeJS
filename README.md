@@ -1,6 +1,11 @@
 # 🤖 Node.js + AI Experiments
 
 Welcome to my experimental repository where I explore the power of **Node.js** and **AI**! 🌍💡
+<p align="center">
+  <a href="https://github.com/Saquib-Anjum/AI-with-NodeJS/blob/main/ProjectsIdea.md" target="_blank">
+    <img src="https://img.shields.io/badge/💡 Project%20Ideas-Click%20Here-yellow?style=for-the-badge&logo=devbox&logoColor=black" alt="Project Ideas" style="height:40px;">
+  </a>
+</p>
 
 ## 🚀 Project Overview
 
