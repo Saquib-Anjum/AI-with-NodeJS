@@ -1,7 +1,7 @@
 // PortfolioGenerator.jsx
 import React, { useState } from "react";
 import { Clipboard, Eye, Download } from "lucide-react";
-
+import axios from 'axios'
 const Button = ({ children, className = "", ...props }) => (
   <button
     className={`px-4 py-2 rounded-2xl shadow hover:shadow-md transition font-medium border border-gray-200 bg-white ${className}`}
@@ -49,7 +49,7 @@ export default function App() {
 
   const fetchGeneratedCode = async () => {
     // Replace with your actual backend API call
-    const response = await fetch("/api/generate", {
+    const response = await fetch("/api/user", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(form),
