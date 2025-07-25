@@ -1,156 +1,76 @@
-// PortfolioGenerator.jsx
-import React, { useState } from "react";
-import { Clipboard, Eye, Download } from "lucide-react";
-import axios from 'axios'
-const Button = ({ children, className = "", ...props }) => (
-  <button
-    className={`px-4 py-2 rounded-2xl shadow hover:shadow-md transition font-medium border border-gray-200 bg-white ${className}`}
-    {...props}
-  >
-    {children}
-  </button>
-);
-const Input = (props) => (
-  <input
-    className="w-full p-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-300"
-    {...props}
-  />
-);
-const Textarea = (props) => (
-  <textarea
-    className="w-full p-2 border rounded-lg font-mono resize-none focus:outline-none focus:ring focus:border-blue-300"
-    {...props}
-  />
-);
-const Card = ({ children, className = "" }) => (
-  <div className={`bg-white rounded-2xl shadow-xl ${className}`}>{children}</div>
-);
-const CardHeader = ({ children }) => (
-  <div className="p-4 border-b border-gray-100">{children}</div>
-);
-const CardTitle = ({ children, className = "" }) => (
-  <h2 className={`text-xl font-semibold ${className}`}>{children}</h2>
-);
-const CardContent = ({ children }) => <div className="p-4">{children}</div>;
+import React, { useState } from 'react';
+import axios from 'axios';
 
-export default function App() {
+const PortfolioForm = () => {
   const [form, setForm] = useState({
-    name: "",
-    title: "",
-    bio: "",
-    skills: "",
-    email: "",
-    github: "",
-    linkedin: "",
+    name: '',
+    title: '',
+    bio: '',
+    skills: '',
+    email: '',
+    github: '',
+    linkedin: '',
   });
-  const [code, setCode] = useState("");
 
-  const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
+  const [generatedCode, setGeneratedCode] = useState('');
+  const [loading, setLoading] = useState(false);
 
-  const fetchGeneratedCode = async () => {
-    // Replace with your actual backend API call
-    const response = await fetch("/api/user", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(form),
-    });
-    const data = await response.text();
-    setCode(data);
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const copyCode = async () => {
-    if (!code) return;
-    await navigator.clipboard.writeText(code);
-  };
-
-  const previewCode = () => {
-    if (!code) return;
-    const blob = new Blob([code], { type: "text/html" });
-    const url = URL.createObjectURL(blob);
-    window.open(url, "_blank");
-  };
-
-  const downloadCode = () => {
-    if (!code) return;
-    const blob = new Blob([code], { type: "text/html" });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = "portfolio.html";
-    a.click();
-    URL.revokeObjectURL(url);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    try {
+      const response = await axios.post('/api/user/portfolio', form);
+      setGeneratedCode(response.data.portfolio);
+    } catch (error) {
+      console.error("Error generating portfolio:", error);
+      alert("Something went wrong.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
-    <div className="max-w-5xl mx-auto p-4">
-      <Card className="mb-6">
-        <CardHeader>
-          <CardTitle className="text-2xl">Portfolio Generator</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="grid md:grid-cols-2 gap-4">
-            <Input name="name" placeholder="Full Name" value={form.name} onChange={handleChange} />
-            <Input name="title" placeholder="Professional Title" value={form.title} onChange={handleChange} />
-            <Textarea
-              name="bio"
-              placeholder="Short bio..."
-              rows={3}
-              value={form.bio}
+    <div className="max-w-3xl mx-auto p-6 bg-white shadow-md rounded-md mt-10">
+      <h2 className="text-2xl font-bold mb-4 text-center">Generate Portfolio</h2>
+      <form onSubmit={handleSubmit} className="space-y-4">
+        {['name', 'title', 'bio', 'skills', 'email', 'github', 'linkedin'].map((field) => (
+          <div key={field}>
+            <label className="block mb-1 font-medium capitalize">{field}</label>
+            <input
+              type="text"
+              name={field}
+              value={form[field]}
               onChange={handleChange}
-              className="md:col-span-2"
+              className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+              required
             />
-            <Input
-              name="skills"
-              placeholder="Skills (comma separated)"
-              value={form.skills}
-              onChange={handleChange}
-              className="md:col-span-2"
-            />
-            <Input name="email" placeholder="Email" value={form.email} onChange={handleChange} />
-            <Input name="github" placeholder="GitHub URL" value={form.github} onChange={handleChange} />
-            <Input name="linkedin" placeholder="LinkedIn URL" value={form.linkedin} onChange={handleChange} />
           </div>
-          <Button onClick={fetchGeneratedCode} className="mt-4 w-full bg-blue-600 text-white hover:bg-blue-700">
-            Generate Code
-          </Button>
-        </CardContent>
-      </Card>
+        ))}
+        <button
+          type="submit"
+          className="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition duration-200"
+          disabled={loading}
+        >
+          {loading ? "Generating..." : "Generate Portfolio"}
+        </button>
+      </form>
 
-      {code && (
-        <Card>
-          <CardHeader>
-            <CardTitle className="flex items-center justify-between">
-              Generated HTML
-              <div className="flex space-x-2">
-                <Button
-                  onClick={copyCode}
-                  title="Copy"
-                  className="p-2 bg-gray-50 hover:bg-gray-100"
-                >
-                  <Clipboard className="h-5 w-5" />
-                </Button>
-                <Button
-                  onClick={previewCode}
-                  title="Preview"
-                  className="p-2 bg-gray-50 hover:bg-gray-100"
-                >
-                  <Eye className="h-5 w-5" />
-                </Button>
-                <Button
-                  onClick={downloadCode}
-                  title="Download"
-                  className="p-2 bg-gray-50 hover:bg-gray-100"
-                >
-                  <Download className="h-5 w-5" />
-                </Button>
-              </div>
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <Textarea value={code} readOnly rows={20} className="h-64" />
-          </CardContent>
-        </Card>
+      {generatedCode && (
+        <div className="mt-8">
+          <h3 className="text-xl font-semibold mb-2">Generated HTML:</h3>
+          <textarea
+            className="w-full h-96 p-4 border border-gray-300 rounded-md font-mono"
+            value={generatedCode}
+            readOnly
+          />
+        </div>
       )}
     </div>
   );
-}
+};
+
+export default PortfolioForm;
